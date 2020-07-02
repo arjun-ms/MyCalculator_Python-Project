@@ -19,6 +19,30 @@ btn_row4 = Frame(window)
 btn_row4.pack(expand=TRUE, fill="both")
 
 
+btn1_ = Button(
+    btn_row1,
+    text="1",
+    font=("Verdana",22),
+)
+btn1_.pack(side=LEFT, expand=TRUE, fill="both")
+btn2_ = Button(
+    btn_row1,
+    text="2",
+    font=("Verdana",22),
+)
+btn2_.pack(side=LEFT, expand=TRUE, fill="both")
+btn3_ = Button(
+    btn_row1,
+    text="3",
+    font=("Verdana",22),
+)
+btn3_.pack(side=LEFT, expand=TRUE, fill="both")
+btn4_ = Button(
+    btn_row1,
+    text="4",
+    font=("Verdana",22),
+)
+btn4_.pack(side=LEFT, expand=TRUE, fill="both")
 
 
 
