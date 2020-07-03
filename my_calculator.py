@@ -1,5 +1,6 @@
 from tkinter import *
 from PIL import ImageTk, Image
+from tkinter import messagebox
 
 value_ = ""
 old_value_ = 0
@@ -79,7 +80,7 @@ def btn_plus_isclicked():
     global old_value_
     global operator_
     global value_
-    old_value_ = int(value_)
+    old_value_ = float(value_)
     operator_ = "+"
     value_ = value_ + "+"
     data.set(value_)
@@ -88,7 +89,7 @@ def btn_div_isclicked():
     global old_value_
     global operator_
     global value_
-    old_value_ = int(value_)
+    old_value_ = float(value_)
     operator_ = "÷"
     value_ = value_ + "÷"
     data.set(value_)
@@ -97,7 +98,7 @@ def btn_mul_isclicked():
     global old_value_
     global operator_
     global value_
-    old_value_ = int(value_)
+    old_value_ = float(value_)
     operator_ = "x"
     value_ = value_ + "x"
     data.set(value_)
@@ -106,28 +107,66 @@ def btn_min_isclicked():
     global old_value_
     global operator_
     global value_
-    old_value_ = int(value_)
+    old_value_ = float(value_)
     operator_ = "-"
     value_ = value_ + "-"
     data.set(value_)
 def btn_percent_isclicked():
     global old_value_
     global value_
-    value_ = int(value_)/100
-    old_value_ = int(value_)
+    value_ = float(value_)/100
+    old_value_ = float(value_)
     data.set(value_)
 def btn_oneby_isclicked():
     global old_value_
     global value_
-    value_ = 1/int(value_)
-    old_value_ = int(value_)
+    value_ = 1/float(value_)
+    old_value_ = float(value_)
+    data.set(value_)
+
+################################ Other Buttons Clicked ########################################
+
+def btn_clear_clicked():
+    global old_value_
+    global value_
+    global operator_
+    value_ = ""
+    old_value_ = 0
+    operator_ = ""
     data.set(value_)
 
 
-
-
-
-
+def result():
+    global old_value_
+    global value_
+    global operator_
+    full_value_ = value_
+    if operator_ == "+":
+        second_value_ = float((full_value_.split("+")[1]))
+        result_= float(old_value_ + second_value_)
+        data.set(result_)
+        value_ = str(result_)
+    elif operator_ == "-":
+        second_value_ = float((full_value_.split("-")[1]))
+        result_ = float(old_value_ - second_value_)
+        data.set(result_)
+        value_ = str(result_)
+    elif operator_ == "x":
+        second_value_ = float((full_value_.split("x")[1]))
+        result_ = float(old_value_ * second_value_)
+        data.set(result_)
+        value_ = str(result_)
+    elif operator_ == "÷":
+        second_value_ = float((full_value_.split("÷")[1]))
+        if second_value_ == 0:
+            messagebox.showerror("Error","Can't divide by zero")
+            old_value_ = ""
+            value_ = ""
+            data.set(value_)
+        else:
+            result_ = float(old_value_ / second_value_)
+            data.set(result_)
+            value_ = str(result_)
 
 
 
@@ -468,6 +507,7 @@ btn_clear_ = Button(
     bg="#3b3b3b",
     fg="orange",
     activebackground="gray",
+    command=btn_clear_clicked
 )
 btn_clear_.pack(side=LEFT, expand=True, fill="both")
 btn_clear_.bind("<Enter>", entered_clear)
@@ -636,7 +676,7 @@ btn_min_ = Button(
     bg="#3b3b3b",
     fg="orange",
     activebackground="gray",
-    command = btn_mul_isclicked
+    command = btn_min_isclicked
 )
 btn_min_.pack(side=LEFT, expand=True, fill="both")
 btn_min_.bind("<Enter>", entered_min)
@@ -760,6 +800,7 @@ btn_equal_ = Button(
     bg="#3b3b3b",
     fg="orange",
     activebackground="gray",
+    command=result,
 
 )
 btn_equal_.pack(side=LEFT, expand=True, fill="both")
