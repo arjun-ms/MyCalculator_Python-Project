@@ -135,6 +135,11 @@ def btn_clear_clicked():
     operator_ = ""
     data.set(value_)
 
+def backspace():
+    global value_
+    value_ = (value_[:-1])
+    data.set(value_)
+
 
 def result():
     global old_value_
@@ -523,6 +528,7 @@ btn_del_ = Button(
     bg="#3b3b3b",
     fg="orange",
     activebackground="gray",
+    command=backspace
 )
 btn_del_.pack(side=LEFT, expand=True, fill="both")
 btn_del_.bind("<Enter>", entered_del)
